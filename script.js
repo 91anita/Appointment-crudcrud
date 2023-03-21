@@ -27,6 +27,21 @@ function submitdetails(event){
 
 }
 
+window.addEventListener("DOMContentLoaded",() => {
+    axios.get("https://crudcrud.com/api/c5a27b85a5614047927ba70d5990059f/appointmentdata")
+    .then((response) =>{
+        console.log(response)
+
+        for(var i=0; i<response.data.length; i++)
+        {
+            showuseronscreen(response.data[i])
+        }
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+})
+
 
 function showuseronscreen (obj){
     const parentelem = document.getElementById("users")
