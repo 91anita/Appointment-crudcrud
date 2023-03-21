@@ -72,9 +72,28 @@ function showuseronscreen (obj){
     editbutton.onclick = () => {
         localStorage.removeItem(obj.email)
         parentelem.removeChild(childelem)
-        document.getElementById("fnameinput").value = obj.fname
-        document.getElementById("emailinput").value = obj.email
-        document.getElementById("mobileinput").value = obj.mobile
+        document.getElementById("name").value = obj.name
+        document.getElementById("emailid").value = obj.email
+        document.getElementById("phno").value = obj.mobile
+        document.getElementById("submitbutton").style.display = "none";
+    const updatebutton = document.getElementById("updatebutton");
+    updatebutton.style.display = "block";
+    updatebutton.onclick = () => {
+      axios
+        .put(`https://crudcrud.com/api/c5a27b85a5614047927ba70d5990059f/appointmentdata/${obj._id}`, {
+          name: document.getElementById("name").value,
+          email: document.getElementById("emailid").value,
+          mobile: document.getElementById("mobile").value,
+        })
+        .then((response) => {
+          childelem.textContent = response.data.name + " - " + response.data.email + " - " + response.data.phno;
+          document.getElementById("submitbutton").style.display = "block";
+          updatebutton.style.display = "none";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     }
 
